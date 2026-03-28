@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { logWorkout, parseVoiceInput } from '../lib/api';
-import { Mic, MicOff, Plus, ChevronRight, Flame } from 'lucide-react';
-import { ActivityRing } from '../components/ui/ActivityRing';
+import { Mic, MicOff, ChevronRight, Flame } from 'lucide-react';
 
 const EXERCISES = [
   { name: 'Bench Press', emoji: '🏋️', muscle: 'Chest' },

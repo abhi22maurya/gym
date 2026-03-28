@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Bell } from 'lucide-react';
 import { currentUserId, api } from '../../lib/api';
 
-const VAPID_PUBLIC_KEY = 'BM_aixC839y2U5JXXvM2aVbO0E3T3RzXb3I2-i--7NqfUv7A9hU8w2Y_b8w6R1R5y0W8A6Y5a3A6V5D4Q6S5E4a';
+const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY || 'BM_aixC839y2U5JXXvM2aVbO0E3T3RzXb3I2-i--7NqfUv7A9hU8w2Y_b8w6R1R5y0W8A6Y5a3A6V5D4Q6S5E4a';
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);

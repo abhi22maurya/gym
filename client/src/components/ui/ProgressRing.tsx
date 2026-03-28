@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '../../lib/utils';
+
 
 interface ProgressRingProps {
   progress: number; // 0 to 100

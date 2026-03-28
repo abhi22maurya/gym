@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  LayoutDashboard, Dumbbell, Utensils, Droplets, Moon, Camera, Settings, ChevronRight, Activity
+  LayoutDashboard, Dumbbell, Utensils, Droplets, Camera, Settings, ChevronRight, Activity
 } from 'lucide-react';
 
 export type Page = 'overview' | 'workout' | 'nutrition' | 'hydration' | 'sleep' | 'posture' | 'healthkit' | 'settings';
