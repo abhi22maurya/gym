@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  goalType  String   @default("lose_fat") // "lose_fat" | "gain_muscle" | "improve_posture"
+  weight    Float?
+  height    Float?
+  age       Int?
+  createdAt DateTime @default(now())
+
+  workoutLogs  WorkoutLog[]
+  dietLogs     DietLog[]
+  bodyMetrics  BodyMetric[]
+  waterLogs    WaterLog[]
+  sleepLogs    SleepLog[]
+  postureLogs  PostureLog[]
+  pushSubscriptions PushSubscription[]
+}
+
+model WorkoutLog {
+  id          String   @id @default(cuid())
+  userId      String
+  date        DateTime @default(now())
+  exerciseName String
+  sets        Int
+  reps        Int
+  weightKg    Float?
+  durationMin  Int?
+  notes       String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+}
+
+model DietLog {
+  id          String   @id @default(cuid())
+  userId      String
+  date        DateTime @default(now())
+  mealName    String
+  calories    Int?
+  proteinG    Float?
+  carbsG      Float?
+  fatG        Float?
+  mealType    String   @default("snack") // "breakfast" | "lunch" | "dinner" | "snack"
+  imageUrl    String?
+  aiParsed    Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+}
+
+model BodyMetric {
+  id        String   @id @default(cuid())
+  userId    String
+  date      DateTime @default(now())
+  weightKg  Float?
+  bodyFatPct Float?
+  chestCm   Float?
+  waistCm   Float?
+  armCm     Float?
+  thighCm   Float?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+}
+
+model WaterLog {
+  id        String   @id @default(cuid())
+  userId    String
+  date      DateTime @default(now())
+  amountMl  Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+}
+
+model SleepLog {
+  id          String   @id @default(cuid())
+  userId      String
+  date        DateTime @default(now())
+  sleepHours  Float
+  quality     Int      // 1-5 scale
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+}
+
+model PostureLog {
+  id         String   @id @default(cuid())
+  userId     String
+  date       DateTime @default(now())
+  score      Int      // 0-100
+  feedback   String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

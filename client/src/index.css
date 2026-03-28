@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ============================================================
+   APPLE DESIGN TOKEN SYSTEM
+   Mimics iOS/macOS system colors + SF Pro via system-ui
+   ============================================================ */
+
+:root {
+  /* Typography — SF Pro on Apple devices via system-ui */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', system-ui, sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  /* iOS System Size Scale */
+  --text-caption2: 11px;
+  --text-caption: 12px;
+  --text-footnote: 13px;
+  --text-subhead: 15px;
+  --text-callout: 16px;
+  --text-body: 17px;
+  --text-headline: 17px;
+  --text-title3: 20px;
+  --text-title2: 22px;
+  --text-title1: 28px;
+  --text-large-title: 34px;
+
+  /* Radii — Apple's rounded corner progression */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-full: 9999px;
+
+  /* Spring animation (Apple's signature easing) */
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.25, 0, 0, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  /* iOS Activity Ring colors */
+  --ring-move: #FA2D55;
+  --ring-exercise: #A3F70F;
+  --ring-stand: #4DF0CD;
+}
+
+/* ============================================================
+   LIGHT MODE — Apple Health / iOS default
+   ============================================================ */
+:root, [data-theme="light"] {
+  --bg-primary: #F2F2F7;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #EFEFF4;
+  --bg-grouped: #F2F2F7;
+  --bg-elevated: #FFFFFF;
+
+  /* Navigation bar — frosted white */
+  --nav-bg: rgba(242, 242, 247, 0.85);
+  --tab-bg: rgba(249, 249, 249, 0.94);
+
+  /* Labels */
+  --label-primary: #000000;
+  --label-secondary: rgba(60, 60, 67, 0.6);
+  --label-tertiary: rgba(60, 60, 67, 0.3);
+  --label-quaternary: rgba(60, 60, 67, 0.18);
+
+  /* Fills */
+  --fill-primary: rgba(120, 120, 128, 0.2);
+  --fill-secondary: rgba(120, 120, 128, 0.16);
+  --fill-tertiary: rgba(120, 120, 128, 0.12);
+
+  /* Separators */
+  --separator: rgba(60, 60, 67, 0.29);
+  --separator-opaque: #C6C6C8;
+
+  /* iOS System Colors */
+  --color-blue: #007AFF;
+  --color-green: #34C759;
+  --color-indigo: #5856D6;
+  --color-orange: #FF9500;
+  --color-pink: #FF2D55;
+  --color-purple: #AF52DE;
+  --color-red: #FF3B30;
+  --color-teal: #5AC8FA;
+  --color-yellow: #FFCC00;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   DARK MODE — iOS/macOS Dark appearance
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #000000;
+    --bg-secondary: #1C1C1E;
+    --bg-tertiary: #2C2C2E;
+    --bg-grouped: #000000;
+    --bg-elevated: #1C1C1E;
+
+    --nav-bg: rgba(28, 28, 30, 0.85);
+    --tab-bg: rgba(28, 28, 30, 0.94);
+
+    --label-primary: #FFFFFF;
+    --label-secondary: rgba(235, 235, 245, 0.6);
+    --label-tertiary: rgba(235, 235, 245, 0.3);
+    --label-quaternary: rgba(235, 235, 245, 0.16);
+
+    --fill-primary: rgba(120, 120, 128, 0.36);
+    --fill-secondary: rgba(120, 120, 128, 0.32);
+    --fill-tertiary: rgba(120, 120, 128, 0.24);
+
+    --separator: rgba(84, 84, 88, 0.65);
+    --separator-opaque: #38383A;
+
+    --color-blue: #0A84FF;
+    --color-green: #30D158;
+    --color-indigo: #5E5CE6;
+    --color-orange: #FF9F0A;
+    --color-pink: #FF375F;
+    --color-purple: #BF5AF2;
+    --color-red: #FF453A;
+    --color-teal: #64D2FF;
+    --color-yellow: #FFD60A;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* ============================================================
+   GLOBAL RESET & BASE STYLES
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  /* Prevent bounce scroll from showing odd colors in iOS */
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  color: var(--label-primary);
+  background: var(--bg-primary);
+  min-height: 100dvh; /* dvh for iOS Safari */
+  overflow-x: hidden;
+  /* Enable momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   TYPOGRAPHY — Apple heading scale
+   ============================================================ */
+.text-large-title { font-size: var(--text-large-title); font-weight: 700; letter-spacing: 0.37px; }
+.text-title1 { font-size: var(--text-title1); font-weight: 700; letter-spacing: 0.36px; }
+.text-title2 { font-size: var(--text-title2); font-weight: 700; letter-spacing: 0.35px; }
+.text-title3 { font-size: var(--text-title3); font-weight: 600; letter-spacing: 0.38px; }
+.text-headline { font-size: var(--text-headline); font-weight: 600; letter-spacing: -0.41px; }
+.text-body { font-size: var(--text-body); font-weight: 400; letter-spacing: -0.41px; }
+.text-callout { font-size: var(--text-callout); font-weight: 400; letter-spacing: -0.32px; }
+.text-subhead { font-size: var(--text-subhead); font-weight: 400; letter-spacing: -0.24px; }
+.text-footnote { font-size: var(--text-footnote); font-weight: 400; letter-spacing: -0.08px; }
+.text-caption { font-size: var(--text-caption); font-weight: 400; letter-spacing: 0px; }
+
+/* ============================================================
+   APPLE CARD
+   ============================================================ */
+.apple-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.apple-card:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   APPLE BUTTON
+   ============================================================ */
+.apple-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-callout);
+  border-radius: var(--radius-full);
+  padding: 12px 20px;
+  transition: all var(--duration-fast) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.apple-btn-primary {
+  background: var(--color-blue);
+  color: white;
+}
+.apple-btn-primary:active {
+  filter: brightness(0.85);
+  transform: scale(0.97);
+}
+
+.apple-btn-secondary {
+  background: var(--fill-primary);
+  color: var(--label-primary);
+}
+.apple-btn-secondary:active {
+  filter: brightness(0.9);
+  transform: scale(0.97);
+}
+
+.apple-btn-fill-green {
+  background: var(--color-green);
+  color: white;
+}
+
+/* ============================================================
+   APPLE FROSTED GLASS NAV BAR
+   ============================================================ */
+.apple-navbar {
+  background: var(--nav-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 0.5px solid var(--separator);
+}
+
+/* ============================================================
+   iOS BOTTOM TAB BAR
+   ============================================================ */
+.apple-tabbar {
+  background: var(--tab-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 0.5px solid var(--separator);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ============================================================
+   APPLE INPUT
+   ============================================================ */
+.apple-input {
+  width: 100%;
+  background: var(--fill-tertiary);
+  border: none;
+  outline: none;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  color: var(--label-primary);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.apple-input::placeholder {
+  color: var(--label-tertiary);
+}
+
+.apple-input:focus {
+  background: var(--fill-secondary);
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.2);
+}
+
+/* ============================================================
+   SAFE AREA HELPERS
+   ============================================================ */
+.safe-top { padding-top: env(safe-area-inset-top, 0px); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.safe-left { padding-left: env(safe-area-inset-left, 0px); }
+.safe-right { padding-right: env(safe-area-inset-right, 0px); }
+
+/* ============================================================
+   SCROLLBAR — macOS style
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--label-quaternary); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--label-tertiary); }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ringDraw {
+  from { stroke-dashoffset: var(--ring-full); }
+  to { stroke-dashoffset: var(--ring-offset); }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--duration-normal) var(--ease-out) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-normal) var(--spring) both;
+}
+
+/* Stagger children */
+.animate-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.animate-stagger > *:nth-child(2) { animation-delay: 60ms; }
+.animate-stagger > *:nth-child(3) { animation-delay: 120ms; }
+.animate-stagger > *:nth-child(4) { animation-delay: 180ms; }
+.animate-stagger > *:nth-child(5) { animation-delay: 240ms; }
+.animate-stagger > *:nth-child(6) { animation-delay: 300ms; }
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.text-primary { color: var(--label-primary); }
+.text-secondary { color: var(--label-secondary); }
+.text-tertiary { color: var(--label-tertiary); }
+.text-blue { color: var(--color-blue); }
+.text-green { color: var(--color-green); }
+.text-orange { color: var(--color-orange); }
+.text-red { color: var(--color-red); }
+.text-indigo { color: var(--color-indigo); }
+.text-purple { color: var(--color-purple); }
+.text-pink { color: var(--color-pink); }
+
+.bg-primary { background: var(--bg-primary); }
+.bg-secondary { background: var(--bg-secondary); }
+.bg-tertiary { background: var(--bg-tertiary); }
+.bg-elevated { background: var(--bg-elevated); }
+
+.section-title {
+  font-size: var(--text-footnote);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--label-secondary);
+  padding: 0 4px 8px;
+}
+
+/* List rows — iOS settings style */
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  background: var(--bg-secondary);
+  border-bottom: 0.5px solid var(--separator);
+  min-height: 44px;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.list-row:last-child { border-bottom: none; }
+.list-row:active { background: var(--fill-tertiary); }
+
+/* ============================================================
+   PROGRESS BAR — Apple health style
+   ============================================================ */
+.apple-progress {
+  height: 6px;
+  background: var(--fill-primary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.apple-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.8s var(--ease-out);
+}
+
+/* ============================================================
+   SEGMENT CONTROL — iOS style
+   ============================================================ */
+.segment-control {
+  display: flex;
+  background: var(--fill-tertiary);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  gap: 2px;
+}
+
+.segment-btn {
+  flex: 1;
+  padding: 6px 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-radius: calc(var(--radius-md) - 2px);
+  font-family: var(--font-sans);
+  font-size: var(--text-subhead);
+  font-weight: 500;
+  color: var(--label-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.segment-btn.active {
+  background: var(--bg-secondary);
+  color: var(--label-primary);
+  box-shadow: var(--shadow-sm);
+}
