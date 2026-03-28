@@ -4,11 +4,13 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api
 
 // Globally mutable user ID for simple auth injection
 export let currentUserId = 'demo-user-001';
+export let currentToken: string | null = null;
 
 export const api = axios.create({ baseURL: BASE_URL });
 
 export const setApiAuth = (userId: string, token: string | null) => {
   currentUserId = userId;
+  currentToken = token;
   if (token) {
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   } else {

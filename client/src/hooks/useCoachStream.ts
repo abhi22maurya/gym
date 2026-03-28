@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
-import { currentUserId } from '../lib/api';
+import { currentUserId, currentToken } from '../lib/api';
 
 export function useCoachStream() {
   const [suggestion, setSuggestion] = useState('');
@@ -16,7 +16,7 @@ export function useCoachStream() {
     setSuggestion('');
     
     const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api';
-    const source = new EventSource(`${BASE_URL}/coach/suggest-stream?userId=${currentUserId}`);
+    const source = new EventSource(`${BASE_URL}/coach/suggest-stream?userId=${currentUserId}&token=${currentToken || ''}`);
     eventSourceRef.current = source;
     
     source.onmessage = (e) => {

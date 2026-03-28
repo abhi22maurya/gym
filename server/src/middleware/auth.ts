@@ -17,8 +17,14 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
     return next();
   }
 
+  // Service Worker / API Key bypass (for iOS Shortcuts, WhatsApp etc)
+  if (req.headers['x-api-key'] && req.headers['x-api-key'] === process.env.SERVICE_API_KEY) {
+    req.auth = { userId: req.body.userId || req.query.userId || 'demo-user-001' };
+    return next();
+  }
+
   try {
-    const token = req.headers.authorization?.replace('Bearer ', '');
+    const token = req.headers.authorization?.replace('Bearer ', '') || (req.query.token as string);
     
     // In development mode, allow fallback to demo user if no token is provided
     if (!token && process.env.NODE_ENV !== 'production') {
